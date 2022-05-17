@@ -31,7 +31,14 @@ User.init({
     allowNull: false,
     // there cannot be any duplicate email values in this table
     unique: true,
-    // if allowNull is set to FALSE, we can run our data through validators before creating the table data
+    validate: {
+      isEmail: true
+    }
+  },
+  // define a password column
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
     validate: {
       // this means the password must be at least four characters long
       len: [4]
