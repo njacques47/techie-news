@@ -5,6 +5,7 @@ const { User } = require('../../models');
 router.get('/', (req, res) => {
   // access our User model and run .findAll() method
   // the .findAll() method is the same as SELECT * FROM users in SQL
+  // PASSWORD is excluded from the query
   User.findAll({
     attributes: { exclude: ['password'] }
   })
@@ -54,6 +55,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   // if req.body has exact key/value pairs to match the model, you can just use req.body instead
   User.update(req.body, {
+    individualHooks: true,
     where: {
       id: req.params.id
     }
