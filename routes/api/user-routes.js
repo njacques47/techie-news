@@ -51,6 +51,32 @@ router.post('/', (req, res) => {
   });
 });
 
+// POST /login
+router.post('/login', (req, res) => {
+  // expect email and password
+  User.findOne({
+    where: {
+      email: req.body.email
+    }
+  }).then(dbUserData => {
+    if (!dbUserData){
+      res.status(400).json({ message: 'Email not registered' });
+      return;
+    }
+
+    res.json({ user: dbUserData });
+
+    // verify user
+    const validPassword = dbUserData.checkPassword(req.body.password);
+    if (!validPassword){
+      res.status(400).json({ message: 'Invalid password'});
+      return;
+    }
+
+    res.json({ user: dbUserData, message: 'Now logged in as ${username}'});
+  });
+})
+
 // PUT /api/users/1
 router.put('/:id', (req, res) => {
   // if req.body has exact key/value pairs to match the model, you can just use req.body instead
