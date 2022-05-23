@@ -51,12 +51,11 @@ User.init(
   // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
     hooks: {
       // set up before create lifecycle "hook" functionality
-      beforeCreate(userData) {
-        return bcrypt.hash(userData.password, 10).then(newUserData => {
-          return newUserData
-        });
-      }
-    },
+      async beforeCreate(newUserData) {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10)
+        return newUserData;
+        }
+      },
 
     // pass in our imported sequelize connection (the direct connection to our database)
     sequelize,
