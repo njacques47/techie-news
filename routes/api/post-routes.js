@@ -3,10 +3,10 @@ const { Post, User } = require('../../models');
 
 // get all users
 router.get('/', (req, res) => {
-  console.log('================');
   Post.findAll({
     // query configuration
     attributes: ['id', 'post_url', 'title', 'created_at'],
+    order: [['created_at', 'DESC']],
     include: [
       {
         model: User,
@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    attributes: ['id', 'post_url', 'title', 'created_at'], //39402
+    attributes: ['id', 'post_url', 'title', 'created_at'],
     include: [
       {
         model: User,
@@ -108,16 +108,5 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-// get all posts
-Post.findAll({
-  attributes: ['id', 'post_url', 'title', 'created_at'],
-  order: [['created_at', 'DESC']], 
-  include: [
-    {
-      model: User,
-      attributes: ['username']
-    }
-  ]
-})
 
 module.exports = router;

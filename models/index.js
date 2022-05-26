@@ -11,4 +11,3 @@ Post.belongsTo(User, { // a single post can only have one author
 });
 
 module.exports = { User, Post };
-// module 13.3.5
