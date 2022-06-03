@@ -8,7 +8,7 @@ Vote.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      primary: true,
+      primaryKey: true,
       autoIncrement: true
     },
     user_id: { 
