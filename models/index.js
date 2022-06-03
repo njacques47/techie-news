@@ -12,7 +12,7 @@ Post.belongsTo(User, { // a single post can only have one author
   foreignKey: 'user_id',
 });
 
-User.belongsToMany( Post, {
+User.belongsToMany(Post, { 
   through: Vote,
   as: 'voted_posts',
   foreignKey: 'user_id'

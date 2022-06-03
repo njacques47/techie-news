@@ -11,7 +11,7 @@ Vote.init(
       primary: true,
       autoIncrement: true
     },
-    user_id: { // 4638
+    user_id: { 
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
